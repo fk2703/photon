@@ -1,67 +1,19 @@
-#include <windows.h>            // Заголовочные файлы для Windows
-#include <gl\gl.h>				// Заголовочные файлы для библиотеки OpenGL32
-#include <gl\glu.h>				// Заголовочные файлы для библиотеки GLu32
-//#include <gl\glaux.h>			// Заголовочные файлы для библиотеки GLaux
-#include <vector>
-#include <deque>
-#include <time.h>
+#include "GLWindow.h"
 
-#include "photon.h"
+LRESULT  CALLBACK WndProc( HWND, UINT, WPARAM, LPARAM );
 
-#pragma comment( lib, "opengl32.lib" ) // Искать OpenGL32.lib при линковке
-#pragma comment( lib, "glu32.lib" )    // Искать GLu32.lib при линковке
-
-using namespace std;
-
-HGLRC  hRC=NULL;				// Постоянный контекст рендеринга
-HDC  hDC=NULL;					// Приватный контекст устройства GDI
-HWND  hWnd=NULL;				// Здесь будет хранится дескриптор окна
-HINSTANCE  hInstance;           // Здесь будет хранится дескриптор приложения
-
-bool  keys[256];				// Массив, используемый для операций с клавиатурой
-bool  active = true;			// Флаг активности окна, установленный в true по умолчанию
-bool  fullscreen = true;		// Флаг режима окна, установленный в полноэкранный по умолчанию
-
-LRESULT  CALLBACK WndProc( HWND, UINT, WPARAM, LPARAM );		// Прототип функции WndProc
-
-GLvoid ReSizeGLScene( GLsizei width, GLsizei height )			// Изменить размер и инициализировать окно GL 
+GLWindow::GLWindow(void)
 {
-	if( height == 0 )											// Предотвращение деления на ноль 
-	{
-		height = 1;
-	}
-
-	glViewport( 0, 0, width, height );							// Сброс текущей области вывода
-	glMatrixMode( GL_PROJECTION );								// Выбор матрицы проекций
-
-	glLoadIdentity();											// Сброс матрицы проекции
-
-
-	// Вычисление соотношения геометрических размеров для окна
-	gluPerspective( 45.0f, (GLfloat)width/(GLfloat)height, 0.1f, 200.0f );
-	glMatrixMode( GL_MODELVIEW );								// Выбор матрицы вида модели
-	glLoadIdentity();											// Сброс матрицы вида модели
+	active = true;
+	fullscreen = true;
 }
 
-int InitGL( GLvoid )											// Все установки касаемо OpenGL происходят здесь
+GLWindow::~GLWindow(void)			// Корректное разрушение окна
 {
-	glShadeModel( GL_SMOOTH );									// Разрешить плавное цветовое сглаживание
-	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);						// Очистка экрана в черный цвет
-	glClearDepth( 1.0f );										// Разрешить очистку буфера глубины
 
-	glEnable( GL_DEPTH_TEST );									// Разрешить тест глубины
-
-	glDepthFunc( GL_LEQUAL );									// Тип теста глубины
-	glHint( GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST );		// Улучшение в вычислении перспективы
-	
-	return true;												// Инициализация прошла успешно
 }
 
-// Здесь будет происходить вся прорисовка
-int DrawGLScene( GLvoid )   ;             
-
-
-GLvoid KillGLWindow( GLvoid )           // Корректное разрушение окна
+void GLWindow::KillGLWindow(void)
 {
 	if( fullscreen )					// Мы в полноэкранном режиме?
 	{
@@ -103,8 +55,42 @@ GLvoid KillGLWindow( GLvoid )           // Корректное разрушение окна
 	}
 }
 
-BOOL CreateGLWindow( LPCSTR title, int width, int height, int bits, bool fullscreenflag )
+int GLWindow::InitGL(void)											// Все установки касаемо OpenGL происходят здесь
 {
+	glShadeModel( GL_SMOOTH );									// Разрешить плавное цветовое сглаживание
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);						// Очистка экрана в черный цвет
+	glClearDepth( 1.0f );										// Разрешить очистку буфера глубины
+
+	glEnable( GL_DEPTH_TEST );									// Разрешить тест глубины
+
+	glDepthFunc( GL_LEQUAL );									// Тип теста глубины
+	glHint( GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST );		// Улучшение в вычислении перспективы
+
+	return true;												// Инициализация прошла успешно
+}
+
+void GLWindow::ReSizeGLScene( GLsizei width, GLsizei height )	// Изменить размер и инициализировать окно GL 
+{
+	if( height == 0 )											// Предотвращение деления на ноль 
+	{
+		height = 1;
+	}
+
+	glViewport( 0, 0, width, height );							// Сброс текущей области вывода
+	glMatrixMode( GL_PROJECTION );								// Выбор матрицы проекций
+
+	glLoadIdentity();											// Сброс матрицы проекции
+
+
+	// Вычисление соотношения геометрических размеров для окна
+	gluPerspective( 45.0f, (GLfloat)width/(GLfloat)height, 0.1f, 200.0f );
+	glMatrixMode( GL_MODELVIEW );								// Выбор матрицы вида модели
+	glLoadIdentity();											// Сброс матрицы вида модели
+}
+
+bool GLWindow::CreateGLWindow( LPCSTR title, int width, int height, int bits)
+{
+	;
 	GLuint    PixelFormat;								// Хранит результат после поиска
 	WNDCLASS  wc;										// Структура класса окна
 	DWORD    dwExStyle;									// Расширенный стиль окна
@@ -113,17 +99,13 @@ BOOL CreateGLWindow( LPCSTR title, int width, int height, int bits, bool fullscr
 	RECT WindowRect;									// Grabs Rectangle Upper Left / Lower Right Values
 
 	WindowRect.left=(long)0;							// Установить левую составляющую в 0
-
 	WindowRect.right=(long)width;						// Установить правую составляющую в Width
-
 	WindowRect.top=(long)0;								// Установить верхнюю составляющую в 0
-
 	WindowRect.bottom=(long)height;						// Установить нижнюю составляющую в Height
-	fullscreen=fullscreenflag;							// Устанавливаем значение глобальной переменной fullscreen
-	
+
 	hInstance    = GetModuleHandle(NULL);				// Считаем дескриптор нашего приложения
 	wc.style    = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;	// Перерисуем при перемещении и создаём скрытый DC
-	wc.lpfnWndProc    = (WNDPROC) WndProc;				// Процедура обработки сообщений
+	wc.lpfnWndProc    =  (WNDPROC) WndProc;						// Процедура обработки сообщений
 	wc.cbClsExtra    = 0;								// Нет дополнительной информации для окна
 	wc.cbWndExtra    = 0;								// Нет дополнительной информации для окна
 	wc.hInstance    = hInstance;						// Устанавливаем дескриптор
@@ -278,166 +260,9 @@ BOOL CreateGLWindow( LPCSTR title, int width, int height, int bits, bool fullscr
 	return true;							// Всё в порядке!
 }
 
-
-LRESULT CALLBACK WndProc(  HWND  hWnd,      // Дескриптор нужного окна
-	UINT  uMsg,								// Сообщение для этого окна
-	WPARAM  wParam,							// Дополнительная информация
-	LPARAM  lParam)							// Дополнительная информация
+// Здесь будет происходить вся прорисовка
+int GLWindow::DrawGLScene(void)   
 {
-	switch (uMsg)							// Проверка сообщения для окна
-	{
-	case WM_ACTIVATE:						// Проверка сообщения активности окна
-		{
-			if( !HIWORD( wParam ) )			// Проверить состояние минимизации
-			{
-				active = true;				// Программа активна
-			}
-			else
-			{
-				active = false;				// Программа теперь не активна
-			}
-
-			return 0;						// Возвращаемся в цикл обработки сообщений
-		}
-
-	case WM_SYSCOMMAND:						// Перехватываем системную команду
-		{
-			switch ( wParam )				// Останавливаем системный вызов
-			{
-			case SC_SCREENSAVE:				// Пытается ли запустится скринсейвер?
-			case SC_MONITORPOWER:			// Пытается ли монитор перейти в режим сбережения энергии?
-				return 0;					// Предотвращаем это
-			}
-			break;							// Выход
-		}
-
-	case WM_CLOSE:							// Мы получили сообщение о закрытие?
-		{
-			PostQuitMessage( 0 );			// Отправить сообщение о выходе
-			return 0;						// Вернуться назад
-		}
-
-	case WM_KEYDOWN:						// Была ли нажата кнопка?
-		{
-			keys[wParam] = true;			// Если так, мы присваиваем этой ячейке true
-			return 0;						// Возвращаемся
-		}
-
-	case WM_KEYUP:							// Была ли отпущена клавиша?
-		{
-			keys[wParam] = false;			//  Если так, мы присваиваем этой ячейке false
-			return 0;						// Возвращаемся
-		}
-
-	case WM_SIZE:							// Изменены размеры OpenGL окна
-		{
-			ReSizeGLScene( LOWORD(lParam), HIWORD(lParam) );	// Младшее слово=Width, старшее слово=Height
-			return 0;						// Возвращаемся
-		}
-	}
-
-	// пересылаем все необработанные сообщения DefWindowProc
-	return DefWindowProc( hWnd, uMsg, wParam, lParam );
+	return true;
 }
 
-
-
-int WINAPI WinMain(  HINSTANCE  hInstance,  // Дескриптор приложения
-	HINSTANCE  hPrevInstance,				// Дескриптор родительского приложения
-	LPSTR    lpCmdLine,						// Параметры командной строки
-	int    nCmdShow )						// Состояние отображения окна
-{
-	MSG  msg;								// Структура для хранения сообщения Windows
-	BOOL  done = false;						// Логическая переменная для выхода из цикла
-
-	// Спрашивает пользователя, какой режим экрана он предпочитает
-	//if( MessageBox( NULL, "Хотите ли Вы запустить приложение в полноэкранном режиме?",  "Запустить в полноэкранном режиме?", MB_YESNO | MB_ICONQUESTION) == IDNO )
-	{
-		fullscreen = false;					// Оконный режим
-	}
-
-
-	// Создать наше OpenGL окно
-	if( !CreateGLWindow("Photon", 400, 300, 32, fullscreen ) )
-	{
-		return 0;							// Выйти, если окно не может быть создано
-	}
-	
-	srand (time(NULL));
-	Viewport VPort(100, 100);
-	/*
-	int num_photons;
-	sun *l1 = NULL;
-	deque<photon> photons;
-	deque<photon>& photons_ref = photons;
-
-	l1 = new_sun(6.0, 5.0, 5.0);
-	*/
-
-	while( !done )							// Цикл продолжается, пока done не равно true
-	{
-		if( PeekMessage( &msg, NULL, 0, 0, PM_REMOVE ) )	// Есть ли в очереди какое-нибудь сообщение?
-		{
-			if( msg.message == WM_QUIT )    // Мы поучили сообщение о выходе?
-			{
-				done = true;				// Если так, done=true
-			}
-
-			else							// Если нет, обрабатывает сообщения
-			{
-				TranslateMessage( &msg );   // Переводим сообщение
-				DispatchMessage( &msg );	// Отсылаем сообщение
-			}
-		}
-		else								// Если нет сообщений
-		{
-			// Прорисовываем сцену.
-			if( active )					// Активна ли программа?
-			{
-				if(keys[VK_ESCAPE])			// Было ли нажата клавиша ESC?
-				{
-					done = true;			// ESC говорит об останове выполнения программы
-				}
-
-				else						// Не время для выхода, обновим экран.
-				{
-
-					
-					for (int i = 0; i < VPort.Resolution; i++)
-					for (int j = 0; j < VPort.Resolution; j++)
-					{
-						(*VPort.Matrix)[i*VPort.Resolution + j] = 1;
-					}
-					/*
-					
-					for (int i = 0; i < STEPS_PER_FRAME; i++)
-					{
-						shine(l1, photons_ref);
-						num_photons = step(photons_ref, MATRIX);
-					}
-				*/
-					VPort.DrawGLScene();			// Рисуем сцену
-					SwapBuffers( hDC );		// Меняем буфер (двойная буферизация)
-				}
-			}
-
-
-			if( keys[VK_F1] )			// Была ли нажата F1?
-			{
-				keys[VK_F1] = false;		// Если так, меняем значение ячейки массива на false
-				KillGLWindow();				// Разрушаем текущее окно
-				fullscreen = !fullscreen;   // Переключаем режим
-				// Пересоздаём наше OpenGL окно
-
-				if( !CreateGLWindow( "NeHe OpenGL структура", 400, 300, 32, fullscreen ) )
-				{
-					return 0;				// Выходим, если это невозможно
-				}
-
-			}
-		}
-	}
-
-	KillGLWindow();							// Разрушаем окно
-	return ( msg.wParam );					// Выходим из программы
-}

@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef _H_PHOTON
-#define _H_PHOTON
-
 #include <vector>
 
 class Viewport
@@ -73,4 +70,3 @@ int inline brig_dist_check(photon *temp);
 int shine(sun *suns, deque<photon>& photons);
 */
 
-#endif  /* _H_PHOTON */

@@ -78,11 +78,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\photon.h" />
+    <ClInclude Include="GLWindow.h" />
+    <ClInclude Include="photon.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\main.cpp" />
-    <ClCompile Include="..\photon.cpp" />
+    <ClCompile Include="GLWindow.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="photon.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
