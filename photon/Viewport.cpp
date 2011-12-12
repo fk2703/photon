@@ -1,7 +1,4 @@
-#include "photon.h"
-#include <windows.h>
-#include <gl\gl.h>
-#include <gl\glu.h>
+#include "Viewport.h"
 
 
 Viewport::Viewport(int iResolution, unsigned int iMaxPhotons)
@@ -9,7 +6,6 @@ Viewport::Viewport(int iResolution, unsigned int iMaxPhotons)
 	Resolution = iResolution;
 	MaxPhotons = iMaxPhotons;
 	Matrix = new std::vector<float>(Resolution*Resolution);
-	fMulCoeffitient = (float) 100/Resolution;
 }
 
 Viewport::~Viewport()
@@ -17,39 +13,7 @@ Viewport::~Viewport()
 	delete Matrix;
 }
 
-int Viewport::DrawGLScene()  
-{
-	std::vector<float>& Matrix_ref = *Matrix;
-	glEnable(GL_DEPTH_TEST);
-	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );		// Очистить экран и буфер глубины
-	glLoadIdentity();											// Сбросить текущую матрицу
 
-	glTranslatef(-50.0f, -50.0f,-125);	// Сдвинемся влево на 1.5 единицы и
-	
-	glBegin(GL_QUADS);
-	float fBrightness;
-
-	float fXcoord, fYcoord;
-	fXcoord = 0;
-	for(int i = 0; i < Resolution; i++)
-	{
-		fYcoord = 0;
-		for(int j = 0; j < Resolution; j++)
-		{
-			fBrightness = Matrix_ref[i*Resolution + j];
-			glColor3f(fBrightness, fBrightness, fBrightness);
-			glVertex2f (fXcoord, fYcoord);
-			glVertex2f (fXcoord + fMulCoeffitient, fYcoord);
-			glVertex2f (fXcoord + fMulCoeffitient, fYcoord + fMulCoeffitient);
-			glVertex2f (fXcoord, fYcoord + fMulCoeffitient);
-			fYcoord += fMulCoeffitient;
-		}
-		fXcoord += fMulCoeffitient;
-	}
-	glEnd();
-
-	return true;	// Прорисовка прошла успешно
-}
 /*
 void inline add_photon(deque<photon>& photons, float x, float y, float z, float x1, float y1, float z1, float bright)
 {

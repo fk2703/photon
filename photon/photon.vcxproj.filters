@@ -17,12 +17,15 @@
     <ClCompile Include="main.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
-    <ClCompile Include="photon.cpp">
+    <ClCompile Include="Viewport.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GLWindow.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="Viewport.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
     <ClInclude Include="photon.h">

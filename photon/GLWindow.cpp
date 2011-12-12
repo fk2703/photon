@@ -2,10 +2,12 @@
 
 LRESULT  CALLBACK WndProc( HWND, UINT, WPARAM, LPARAM );
 
-GLWindow::GLWindow(void)
+GLWindow::GLWindow(int iResolution)
 {
 	active = true;
 	fullscreen = true;
+	fMulCoeffitient = (float) 100/iResolution;
+	Resolution = iResolution;
 }
 
 GLWindow::~GLWindow(void)			// Корректное разрушение окна
@@ -261,8 +263,35 @@ bool GLWindow::CreateGLWindow( LPCSTR title, int width, int height, int bits)
 }
 
 // Здесь будет происходить вся прорисовка
-int GLWindow::DrawGLScene(void)   
+int GLWindow::DrawGLScene(std::vector<float> Matrix)   
 {
-	return true;
-}
+	glEnable(GL_DEPTH_TEST);
+	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );		// Очистить экран и буфер глубины
+	glLoadIdentity();											// Сбросить текущую матрицу
 
+	glTranslatef(-50.0f, -50.0f,-125);	// Сдвинемся влево на 1.5 единицы и
+
+	glBegin(GL_QUADS);
+	float fBrightness;
+
+	float fXcoord, fYcoord;
+	fXcoord = 0;
+	for(int i = 0; i < Resolution; i++)
+	{
+		fYcoord = 0;
+		for(int j = 0; j < Resolution; j++)
+		{
+			fBrightness = Matrix[i*Resolution + j];
+			glColor3f(fBrightness, fBrightness, fBrightness);
+			glVertex2f (fXcoord, fYcoord);
+			glVertex2f (fXcoord + fMulCoeffitient, fYcoord);
+			glVertex2f (fXcoord + fMulCoeffitient, fYcoord + fMulCoeffitient);
+			glVertex2f (fXcoord, fYcoord + fMulCoeffitient);
+			fYcoord += fMulCoeffitient;
+		}
+		fXcoord += fMulCoeffitient;
+	}
+	glEnd();
+
+	return true;	// Прорисовка прошла успешно
+}

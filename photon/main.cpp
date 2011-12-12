@@ -1,20 +1,16 @@
-#include <windows.h>            // Заголовочные файлы для Windows
-#include <gl\gl.h>				// Заголовочные файлы для библиотеки OpenGL32
-#include <gl\glu.h>				// Заголовочные файлы для библиотеки GLu32
-//#include <gl\glaux.h>			// Заголовочные файлы для библиотеки GLaux
 #include <vector>
 #include <deque>
 #include <time.h>
 
-#include "GLWindow.h"
 #include "photon.h"
+
 
 #pragma comment( lib, "opengl32.lib" ) // Искать OpenGL32.lib при линковке
 #pragma comment( lib, "glu32.lib" )    // Искать GLu32.lib при линковке
 
 using namespace std;
 
-GLWindow glwWnd;
+GLWindow glwWnd(100);
 
 
 LRESULT CALLBACK WndProc(  HWND  hWnd,      // Дескриптор нужного окна
@@ -135,12 +131,13 @@ int WINAPI WinMain(  HINSTANCE  hInstance,  // Дескриптор приложения
 				else						// Не время для выхода, обновим экран.
 				{
 
-					
+					//рандомное мигание пока что
 					for (int i = 0; i < VPort.Resolution; i++)
 					for (int j = 0; j < VPort.Resolution; j++)
 					{
 						(*VPort.Matrix)[i*VPort.Resolution + j] = (float)rand()/100;
 					}
+
 					/*
 					
 					for (int i = 0; i < STEPS_PER_FRAME; i++)
@@ -149,12 +146,10 @@ int WINAPI WinMain(  HINSTANCE  hInstance,  // Дескриптор приложения
 						num_photons = step(photons_ref, MATRIX);
 					}
 				*/
-					VPort.DrawGLScene();			// Рисуем сцену
+					glwWnd.DrawGLScene(*(VPort.Matrix));			// Рисуем сцену
 					SwapBuffers( glwWnd.hDC );		// Меняем буфер (двойная буферизация)
 				}
 			}
-
-
 		}
 	}
 

@@ -80,11 +80,12 @@
   <ItemGroup>
     <ClInclude Include="GLWindow.h" />
     <ClInclude Include="photon.h" />
+    <ClInclude Include="Viewport.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GLWindow.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="photon.cpp" />
+    <ClCompile Include="Viewport.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
