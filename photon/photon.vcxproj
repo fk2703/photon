@@ -79,12 +79,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="GLWindow.h" />
+    <ClInclude Include="Particle.h" />
     <ClInclude Include="photon.h" />
+    <ClInclude Include="Sun.h" />
     <ClInclude Include="Viewport.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GLWindow.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Particle.cpp" />
+    <ClCompile Include="Sun.cpp" />
     <ClCompile Include="Viewport.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

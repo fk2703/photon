@@ -93,7 +93,9 @@ int WINAPI WinMain(  HINSTANCE  hInstance,  // Дескриптор приложения
 	}
 	
 	srand (time(NULL));
-	Viewport VPort(100, 100);
+	Viewport vpViewport(100, 100);
+	
+	vpViewport.lsSuns.push_front(Sun(5, 5, 0));
 	/*
 	int num_photons;
 	sun *l1 = NULL;
@@ -132,10 +134,10 @@ int WINAPI WinMain(  HINSTANCE  hInstance,  // Дескриптор приложения
 				{
 
 					//рандомное мигание пока что
-					for (int i = 0; i < VPort.Resolution; i++)
-					for (int j = 0; j < VPort.Resolution; j++)
+					for (int i = 0; i < vpViewport.Resolution; i++)
+					for (int j = 0; j < vpViewport.Resolution; j++)
 					{
-						(*VPort.Matrix)[i*VPort.Resolution + j] = (float)rand()/100;
+						(*vpViewport.Matrix)[i*vpViewport.Resolution + j] = (float)rand()/100;
 					}
 
 					/*
@@ -146,7 +148,7 @@ int WINAPI WinMain(  HINSTANCE  hInstance,  // Дескриптор приложения
 						num_photons = step(photons_ref, MATRIX);
 					}
 				*/
-					glwWnd.DrawGLScene(*(VPort.Matrix));			// Рисуем сцену
+					glwWnd.DrawGLScene(*(vpViewport.Matrix));			// Рисуем сцену
 					SwapBuffers( glwWnd.hDC );		// Меняем буфер (двойная буферизация)
 				}
 			}

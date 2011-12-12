@@ -1,5 +1,9 @@
 #pragma once
 #include <vector>
+#include <deque>
+
+#include "Sun.h"
+#include "Particle.h"
 
 class Viewport
 {
@@ -12,6 +16,8 @@ public:
 
 	std::vector<float> *Matrix;
 
+	std::deque<Sun> lsSuns;
+	std::deque<Particle> lsPhotons;
 };
 /*
 #include "stdio.h"
