@@ -8,10 +8,18 @@ Viewport::Viewport(int iResolution, unsigned int iMaxPhotons)
 	Matrix = new std::vector<float>(Resolution*Resolution);
 }
 
-Viewport::~Viewport()
+Viewport::~Viewport(void)
 {
 	delete Matrix;
 }
+
+void Viewport::OneStep(void)
+{
+	Particles &pPhotons_ref = pPhotons;
+	sSuns.Shine(pPhotons_ref);
+	pPhotons.Move();
+}
+
 
 
 /*

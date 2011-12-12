@@ -95,7 +95,7 @@ int WINAPI WinMain(  HINSTANCE  hInstance,  // Дескриптор приложения
 	srand (time(NULL));
 	Viewport vpViewport(100, 100);
 	
-	vpViewport.lsSuns.push_front(Sun(5, 5, 0));
+	vpViewport.sSuns.push_front(Sun(5, 5, 0));
 	/*
 	int num_photons;
 	sun *l1 = NULL;
@@ -148,6 +148,7 @@ int WINAPI WinMain(  HINSTANCE  hInstance,  // Дескриптор приложения
 						num_photons = step(photons_ref, MATRIX);
 					}
 				*/
+					vpViewport.OneStep();
 					glwWnd.DrawGLScene(*(vpViewport.Matrix));			// Рисуем сцену
 					SwapBuffers( glwWnd.hDC );		// Меняем буфер (двойная буферизация)
 				}

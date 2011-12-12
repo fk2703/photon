@@ -1,23 +1,23 @@
 #pragma once
 #include <vector>
-#include <deque>
 
-#include "Sun.h"
-#include "Particle.h"
+#include "Suns.h"
+#include "Particles.h"
 
 class Viewport
 {
 public:
 	Viewport(int iResolution, unsigned int iMaxPhotons);
-	~Viewport();
+	~Viewport(void);
 
 	int Resolution;
 	int MaxPhotons;
 
+	void OneStep(void);
 	std::vector<float> *Matrix;
 
-	std::deque<Sun> lsSuns;
-	std::deque<Particle> lsPhotons;
+	Suns sSuns;
+	Particles pPhotons;
 };
 /*
 #include "stdio.h"

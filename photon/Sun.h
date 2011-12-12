@@ -3,8 +3,8 @@
 class Sun 
 {
 public:
-	Sun(float xc, float yc, float zc) {x = xc; y = yc; z = zc;};
-	~Sun(void);
+	Sun (float xc, float yc, float zc) {x = xc; y = yc; z = zc;};
+	~Sun (void);
 
 	float x;
 	float y;
