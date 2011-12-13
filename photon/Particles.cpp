@@ -13,16 +13,16 @@ Particles::~Particles(void)
 
 void Particles::Move(void)
 {
-	auto It = this->begin();
+	auto ParticleIter = this->begin();
 	Number = 0;
 	
-	while(It < this->end())
+	while(ParticleIter < this->end())
 	{
-		if (It->Move() == PARTICLE_TO_DELETE) 
-			It = erase(It);
+		if (ParticleIter->Move() == PARTICLE_TO_DELETE) 
+			ParticleIter = erase(ParticleIter);
 		else
 		{
-			++It;
+			++ParticleIter;
 			++Number;
 		}
 	}

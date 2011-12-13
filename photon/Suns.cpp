@@ -12,12 +12,12 @@ Suns::~Suns(void)
 
 void Suns::Shine(Particles &pPhotons)
 {
-	auto It = this->begin();
+	auto SunIter = this->begin();
 	int vx, vy, vz;
 	float len, scale;
-	while(It < this->end())
+	while(SunIter < this->end())
 	{
-		for (int i = 0; i < It->iBrightness; i++)
+		for (int i = 0; i < SunIter->Brightness; i++)
 		{
 			do 
 			{
@@ -32,13 +32,15 @@ void Suns::Shine(Particles &pPhotons)
 			} while ((len > (RAND_MAX*RAND_MAX/4))||(len < 10000));
 			len = pow(len, (float) 0.5);
 
-			if (len == 0) scale = 0; else scale = PARTICLE_SPEED/len;
+			if (len == 0) scale = 0; 
+			else scale = PARTICLE_SPEED/len;
 
 			pPhotons.push_front(
-				Particle(It->x, It->y, It->z, (float) vx*scale, (float) vy*scale, (float) vz*scale)
+				Particle(SunIter->x, SunIter->y, SunIter->z, (float) vx*scale, (float) vy*scale, (float) vz*scale)
 			);
+			pPhotons[0].TTL = SunIter->TTL;
 
 		}
-		++It;
+		++SunIter;
 	}
 }

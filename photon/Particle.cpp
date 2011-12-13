@@ -15,8 +15,7 @@ Particle::~Particle(void)
 
 int Particle::CheckCollision(void)
 {
-	int i = 0;
-	if (i == 1 )
+	if (TTL == 0)
 		return PARTICLE_TO_DELETE;
 
 	return PARTICLE_NO_COLLISION;
@@ -24,6 +23,8 @@ int Particle::CheckCollision(void)
 
 int Particle::Move(void)
 {
+	if((TTL != PARTICLE_IMMORTAL)||(TTL != 0)) TTL--;
+
 	int iCollision = CheckCollision();
 	switch(iCollision)
 	{
