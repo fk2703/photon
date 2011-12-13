@@ -3,14 +3,14 @@
 #include <time.h>
 
 #include "photon.h"
-
+#define RESOLUTION 50
 
 #pragma comment( lib, "opengl32.lib" ) // Искать OpenGL32.lib при линковке
 #pragma comment( lib, "glu32.lib" )    // Искать GLu32.lib при линковке
 
 using namespace std;
 
-GLWindow glwWnd(100);
+GLWindow glwWnd(RESOLUTION);
 
 
 LRESULT CALLBACK WndProc(  HWND  hWnd,      // Дескриптор нужного окна
@@ -93,7 +93,7 @@ int WINAPI WinMain(  HINSTANCE  hInstance,  // Дескриптор приложения
 	}
 	
 	srand (time(NULL));
-	Viewport vpViewport(100, 100);
+	Viewport vpViewport(glwWnd.Resolution, 100);
 	
 	vpViewport.sSuns.push_front(Sun(5, 5, 0));
 	/*
@@ -137,7 +137,7 @@ int WINAPI WinMain(  HINSTANCE  hInstance,  // Дескриптор приложения
 					for (int i = 0; i < vpViewport.Resolution; i++)
 					for (int j = 0; j < vpViewport.Resolution; j++)
 					{
-						(*vpViewport.Matrix)[i*vpViewport.Resolution + j] = (float)rand()/100;
+						(*(vpViewport.Matrix))[i*vpViewport.Resolution + j] = (float)((int) rand()%100)/100.0;
 					}
 
 					/*

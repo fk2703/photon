@@ -6,7 +6,7 @@ GLWindow::GLWindow(int iResolution)
 {
 	active = true;
 	fullscreen = true;
-	fMulCoeffitient = (float) 100/iResolution;
+	fMulCoeffitient = 100.00/(float)iResolution;
 	Resolution = iResolution;
 }
 

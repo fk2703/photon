@@ -6,6 +6,7 @@ Viewport::Viewport(int iResolution, unsigned int iMaxPhotons)
 	Resolution = iResolution;
 	MaxPhotons = iMaxPhotons;
 	Matrix = new std::vector<float>(Resolution*Resolution);
+	for(int i = 0; i < Resolution; i++) (*Matrix)[i] = 0;
 }
 
 Viewport::~Viewport(void)

@@ -25,7 +25,7 @@ public:
 	bool  active;					// Флаг активности окна, установленный в true по умолчанию
 	bool  fullscreen;				// Флаг режима окна, установленный в полноэкранный по умолчанию
 
+	int Resolution;
 private:
 	float fMulCoeffitient;
-	int Resolution;
 };
