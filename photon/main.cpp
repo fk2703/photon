@@ -3,7 +3,7 @@
 #include <time.h>
 
 #include "photon.h"
-#define RESOLUTION 50
+#define RESOLUTION 5
 
 #pragma comment( lib, "opengl32.lib" ) // Искать OpenGL32.lib при линковке
 #pragma comment( lib, "glu32.lib" )    // Искать GLu32.lib при линковке
@@ -91,19 +91,11 @@ int WINAPI WinMain(  HINSTANCE  hInstance,  // Дескриптор приложения
 	{
 		return 0;							// Выйти, если окно не может быть создано
 	}
-	
 	srand (time(NULL));
 	Viewport vpViewport(glwWnd.Resolution, 100);
+	ImageSensor &isSensor_a = vpViewport.oWorld.isSensor;
 	
 	vpViewport.sSuns.push_front(Sun(5, 5, 0));
-	/*
-	int num_photons;
-	sun *l1 = NULL;
-	deque<photon> photons;
-	deque<photon>& photons_ref = photons;
-
-	l1 = new_sun(6.0, 5.0, 5.0);
-	*/
 
 	while( !done )							// Цикл продолжается, пока done не равно true
 	{
@@ -129,7 +121,6 @@ int WINAPI WinMain(  HINSTANCE  hInstance,  // Дескриптор приложения
 				{
 					done = true;			// ESC говорит об останове выполнения программы
 				}
-
 				else						// Не время для выхода, обновим экран.
 				{
 
@@ -137,19 +128,11 @@ int WINAPI WinMain(  HINSTANCE  hInstance,  // Дескриптор приложения
 					for (int i = 0; i < vpViewport.Resolution; i++)
 					for (int j = 0; j < vpViewport.Resolution; j++)
 					{
-						(*(vpViewport.Matrix))[i*vpViewport.Resolution + j] = (float)((int) rand()%100)/100.0;
+						isSensor_a[i*vpViewport.Resolution + j] = (float)((int) rand()%100)/100.0;
 					}
 
-					/*
-					
-					for (int i = 0; i < STEPS_PER_FRAME; i++)
-					{
-						shine(l1, photons_ref);
-						num_photons = step(photons_ref, MATRIX);
-					}
-				*/
 					vpViewport.OneStep();
-					glwWnd.DrawGLScene(*(vpViewport.Matrix));			// Рисуем сцену
+					glwWnd.DrawGLScene(isSensor_a);			// Рисуем сцену
 					SwapBuffers( glwWnd.hDC );		// Меняем буфер (двойная буферизация)
 				}
 			}

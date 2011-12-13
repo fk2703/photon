@@ -12,5 +12,6 @@ public:
 	
 	int Number;
 	void Move(void);
+	Objects *opWorld;
 };
 

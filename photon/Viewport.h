@@ -1,8 +1,8 @@
 #pragma once
-#include <vector>
 
 #include "Suns.h"
 #include "Particles.h"
+#include "Objects.h"
 
 class Viewport
 {
@@ -14,10 +14,10 @@ public:
 	int MaxPhotons;
 
 	void OneStep(void);
-	std::vector<float> *Matrix;
 
 	Suns sSuns;
 	Particles pPhotons;
+	Objects oWorld;
 };
 /*
 #include "stdio.h"

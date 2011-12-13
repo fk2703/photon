@@ -9,6 +9,18 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
+    <Filter Include="Заголовочные файлы\Light">
+      <UniqueIdentifier>{d3938e7a-b14e-4d48-9013-12322eac386d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы исходного кода\Light">
+      <UniqueIdentifier>{2042f70f-ffcb-45d9-ae33-30081a9f799c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы исходного кода\Objects">
+      <UniqueIdentifier>{9f7c6b5c-5529-4ab4-8199-28b89627fc7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Заголовочные файлы\Object">
+      <UniqueIdentifier>{4f60c1b7-4a3d-4ec1-a7a6-d92b03808cf4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GLWindow.cpp">
@@ -20,17 +32,29 @@
     <ClCompile Include="Viewport.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
-    <ClCompile Include="Particle.cpp">
-      <Filter>Файлы исходного кода</Filter>
-    </ClCompile>
     <ClCompile Include="Sun.cpp">
-      <Filter>Файлы исходного кода</Filter>
+      <Filter>Файлы исходного кода\Light</Filter>
     </ClCompile>
     <ClCompile Include="Suns.cpp">
-      <Filter>Файлы исходного кода</Filter>
+      <Filter>Файлы исходного кода\Light</Filter>
     </ClCompile>
     <ClCompile Include="Particles.cpp">
-      <Filter>Файлы исходного кода</Filter>
+      <Filter>Файлы исходного кода\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="Particle.cpp">
+      <Filter>Файлы исходного кода\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="MovingObject.cpp">
+      <Filter>Файлы исходного кода\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Файлы исходного кода\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects.cpp">
+      <Filter>Файлы исходного кода\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageSensor.cpp">
+      <Filter>Файлы исходного кода\Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -44,16 +68,28 @@
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
     <ClInclude Include="Particle.h">
-      <Filter>Заголовочные файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="Sun.h">
-      <Filter>Заголовочные файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="Suns.h">
-      <Filter>Заголовочные файлы</Filter>
+      <Filter>Заголовочные файлы\Light</Filter>
     </ClInclude>
     <ClInclude Include="Particles.h">
-      <Filter>Заголовочные файлы</Filter>
+      <Filter>Заголовочные файлы\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="Sun.h">
+      <Filter>Заголовочные файлы\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="Suns.h">
+      <Filter>Заголовочные файлы\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Заголовочные файлы\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="MovingObject.h">
+      <Filter>Заголовочные файлы\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects.h">
+      <Filter>Заголовочные файлы\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageSensor.h">
+      <Filter>Заголовочные файлы\Object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

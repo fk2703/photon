@@ -15,10 +15,11 @@ void Particles::Move(void)
 {
 	auto ParticleIter = this->begin();
 	Number = 0;
-	
+	Objects &opWorld_a = (*opWorld);
+
 	while(ParticleIter < this->end())
 	{
-		if (ParticleIter->Move() == PARTICLE_TO_DELETE) 
+		if (ParticleIter->Move(opWorld_a) == PARTICLE_TO_DELETE) 
 			ParticleIter = erase(ParticleIter);
 		else
 		{
