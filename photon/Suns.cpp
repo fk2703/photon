@@ -13,14 +13,32 @@ Suns::~Suns(void)
 void Suns::Shine(Particles &pPhotons)
 {
 	auto It = this->begin();
-	Particle p;
-
-	for(It; It < this->end(); It++)
+	int vx, vy, vz;
+	float len, scale;
+	while(It < this->end())
 	{
-		p.x = It->x;
-		p.y = It->y;
-		p.z = It->z;
-		for (int i = 0; i < 500; i++)
-			pPhotons.push_front(p);
+		for (int i = 0; i < It->iBrightness; i++)
+		{
+			do 
+			{
+				do{
+					vx = rand() - RAND_MAX/2;
+					vy = rand() - RAND_MAX/2;
+					vz = rand() - RAND_MAX/2;
+				}while ((vx == 0)&&(vy == 0)&&(vz == 0));
+
+				len = vx*vx + vy*vy + vz*vz;
+
+			} while ((len > (RAND_MAX*RAND_MAX/4))||(len < 10000));
+			len = pow(len, (float) 0.5);
+
+			if (len == 0) scale = 0; else scale = PARTICLE_SPEED/len;
+
+			pPhotons.push_front(
+				Particle(It->x, It->y, It->z, (float) vx*scale, (float) vy*scale, (float) vz*scale)
+			);
+
+		}
+		++It;
 	}
 }

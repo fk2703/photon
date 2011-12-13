@@ -8,6 +8,7 @@ Particles::Particles(void)
 
 Particles::~Particles(void)
 {
+
 }
 
 void Particles::Move(void)
@@ -15,13 +16,14 @@ void Particles::Move(void)
 	auto It = this->begin();
 	Number = 0;
 	
-	for(It; It < this->end(); It++)
+	while(It < this->end())
 	{
-		switch(It->CheckCollision())
+		if (It->Move() == PARTICLE_TO_DELETE) 
+			It = erase(It);
+		else
 		{
-		case PARTICLE_NO_COLLISION: It->x += It->vx; It->y += It->vy; It->z += It->vz; break;
+			++It;
+			++Number;
 		}
-		Number++;
 	}
-
 }
