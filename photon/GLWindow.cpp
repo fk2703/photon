@@ -263,7 +263,7 @@ bool GLWindow::CreateGLWindow( LPCSTR title, int width, int height, int bits)
 }
 
 // Здесь будет происходить вся прорисовка
-int GLWindow::DrawGLScene(std::vector<float> Matrix)   
+int GLWindow::DrawGLScene(std::vector<float> &Matrix)   
 {
 	glEnable(GL_DEPTH_TEST);
 	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );		// Очистить экран и буфер глубины
@@ -292,6 +292,9 @@ int GLWindow::DrawGLScene(std::vector<float> Matrix)
 		fXcoord += fMulCoeffitient;
 	}
 	glEnd();
+
+	for(int i = 0; i < Resolution*Resolution; i++)
+		Matrix[i] = 0;
 
 	return true;	// Прорисовка прошла успешно
 }

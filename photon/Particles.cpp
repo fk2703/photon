@@ -3,12 +3,13 @@
 
 Particles::Particles(void)
 {
+
 }
 
 
 Particles::~Particles(void)
 {
-
+	
 }
 
 void Particles::Move(void)

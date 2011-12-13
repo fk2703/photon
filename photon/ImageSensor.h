@@ -8,5 +8,7 @@ class ImageSensor :
 public:
 	~ImageSensor(void);
 
+	int Resolution;
+	float Size;
 };
 

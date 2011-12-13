@@ -3,7 +3,7 @@
 #include <time.h>
 
 #include "photon.h"
-#define RESOLUTION 5
+#define RESOLUTION 50
 
 #pragma comment( lib, "opengl32.lib" ) // Искать OpenGL32.lib при линковке
 #pragma comment( lib, "glu32.lib" )    // Искать GLu32.lib при линковке
@@ -95,7 +95,7 @@ int WINAPI WinMain(  HINSTANCE  hInstance,  // Дескриптор приложения
 	Viewport vpViewport(glwWnd.Resolution, 100);
 	ImageSensor &isSensor_a = vpViewport.oWorld.isSensor;
 	
-	vpViewport.sSuns.push_front(Sun(5, 5, 0));
+	vpViewport.sSuns.push_front(Sun(5, 5, 0, 1000));
 
 	while( !done )							// Цикл продолжается, пока done не равно true
 	{
@@ -123,14 +123,6 @@ int WINAPI WinMain(  HINSTANCE  hInstance,  // Дескриптор приложения
 				}
 				else						// Не время для выхода, обновим экран.
 				{
-
-					//рандомное мигание пока что
-					for (int i = 0; i < vpViewport.Resolution; i++)
-					for (int j = 0; j < vpViewport.Resolution; j++)
-					{
-						isSensor_a[i*vpViewport.Resolution + j] = (float)((int) rand()%100)/100.0;
-					}
-
 					vpViewport.OneStep();
 					glwWnd.DrawGLScene(isSensor_a);			// Рисуем сцену
 					SwapBuffers( glwWnd.hDC );		// Меняем буфер (двойная буферизация)

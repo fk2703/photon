@@ -8,6 +8,7 @@
 
 #define PARTICLE_NO_COLLISION		2
 #define PARTICLE_TO_DELETE			4
+#define PARTICLE_SENSOR_COLLISION	6
 #define PARTICLE_UNKNOWN			5
 
 class Particle :

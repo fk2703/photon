@@ -14,7 +14,7 @@ public:
 	int InitGL(void);
 	void ReSizeGLScene( GLsizei width, GLsizei height );
 	bool CreateGLWindow( LPCSTR title, int width, int height, int bits);
-	int DrawGLScene(std::vector<float> Matrix);
+	int DrawGLScene(std::vector<float> &Matrix);
 
 	HGLRC  hRC;						// Постоянный контекст рендеринга
 	HDC  hDC;						// Приватный контекст устройства GDI
