@@ -1,6 +1,9 @@
 #include "Particle.h"
 #include <math.h>
 
+#include <gsl/gsl_math.h>
+#include <gsl/gsl_ieee_utils.h>
+
 #define DEPTH 0.5
 
 Particle::~Particle(void)
@@ -31,7 +34,7 @@ inline int Particle::CheckCollision(Objects &opWorld_a)
 	size = opWorld_a.lLens.Size;
 	if ((x >= opWorld_a.lLens.x)&&((x + vx) < opWorld_a.lLens.x))
 	{
-		if (pow((y - opWorld_a.lLens.y)*(y - opWorld_a.lLens.y) + (z - opWorld_a.lLens.z)*(z - opWorld_a.lLens.z), 0.5) <= size)
+		if (gsl_hypot((y - opWorld_a.lLens.y), (z - opWorld_a.lLens.z)) <= size)
 		//if ((y < size)&&(z < size)&&(y > 0)&&(z > 0))
 		{
 			return PARTICLE_LENS_COLLISION;
@@ -44,9 +47,9 @@ inline int Particle::CheckCollision(Objects &opWorld_a)
 
 void Particle::NormalizeSpeed(void)
 {
-	double scale;
-
-	scale = PARTICLE_SPEED/pow(vx*vx + vy*vy + vz*vz, 0.5);
+	//long double scale = (long double) PARTICLE_SPEED/pow((long double)vx*vx + vy*vy + vz*vz, (long double) 0.5);
+	long double scale = (long double) PARTICLE_SPEED/gsl_hypot3(vx, vy, vz);
+	
 	vx *= scale;
 	vy *= scale;
 	vz *= scale;
@@ -82,16 +85,18 @@ int Particle::Move(Objects &opWorld_a)
 		{
 			x += vx; y += vy; z += vz; 
 			
-			double LenCenter = opWorld_a.lLens.Size/2;
-			double Focus = opWorld_a.lLens.Focus;
-			double tempy, tempz;
+			long double Focus = 1/opWorld_a.lLens.Focus;
+			long double LenCenter = opWorld_a.lLens.y*Focus;
+			long double tempy, tempz;
 
-			tempy = vy*Focus/vx + LenCenter;
-			tempz = vz*Focus/vx + LenCenter;
+			tempy = vy/vx + LenCenter;
+			tempz = vz/vx + LenCenter;
 			
-			vy = tempy - y;
-			vz = tempz - z;
-			vx = (vx>=0?1:-1)*Focus;
+			double vvx, vvy, vvz;
+
+			vx = (vx>=0?1:-1);
+			vy = tempy - y*Focus;
+			vz = tempz - z*Focus;
 			/**/
 
 			NormalizeSpeed();

@@ -21,6 +21,7 @@ void Suns::Shine(Particles &pPhotons)
 		{
 			
 			gsl_ran_dir_3d(randNumGen, &vx, &vy, &vz);
+			/*
 			vx *= PARTICLE_SPEED;
 			vy *= PARTICLE_SPEED;
 			vz *= PARTICLE_SPEED;
@@ -29,12 +30,12 @@ void Suns::Shine(Particles &pPhotons)
 				Particle(SunIter->x, SunIter->y, SunIter->z, vx, vy, vz)
 			);
 			/**/
-			/*
-			gsl_ran_dir_2d(randNumGen, &vy, &vz);
+			
+			//gsl_ran_dir_2d(randNumGen, &vy, &vz);
 
-			double rad = 4.9;
+			double rad = 6.0;
 			pPhotons.push_back(
-				Particle( SunIter->x, rad*vy + 5, rad*vz + 5, -PARTICLE_SPEED, 0, 0)
+				Particle( SunIter->x, rad*vy + SunIter->y, rad*vz + SunIter->z, -PARTICLE_SPEED, 0, 0)
 				);
 			/**/
 

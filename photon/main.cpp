@@ -3,7 +3,6 @@
 #include <time.h>
 
 #include "photon.h"
-#define RESOLUTION 50
 
 #pragma comment( lib, "opengl32.lib" ) // Искать OpenGL32.lib при линковке
 #pragma comment( lib, "glu32.lib" )    // Искать GLu32.lib при линковке
@@ -11,7 +10,7 @@
 using namespace std;
 
 GLWindow glwWnd;
-Viewport vpViewport(101, 100);
+Viewport vpViewport(200, 100);
 
 
 LRESULT CALLBACK WndProc(  HWND  hWnd,      // Дескриптор нужного окна
@@ -85,7 +84,6 @@ int WINAPI WinMain(  HINSTANCE  hInstance,  // Дескриптор приложения
 
 	glwWnd.fullscreen = false;				// Оконный режим
 
-
 	// Создать наше OpenGL окно
 	if( !glwWnd.CreateGLWindow("Photon", 400, 300, 32) )
 	{
@@ -126,10 +124,12 @@ int WINAPI WinMain(  HINSTANCE  hInstance,  // Дескриптор приложения
 					glwWnd.DrawGLScene(isSensor_a);			// Рисуем сцену
 					isSensor_a.Clear();
 
-					double cng = 1.1;
+					double cng = 1.01;
 
-					if(glwWnd.keys[107] == true){vpViewport.oWorld.lLens.Focus*=cng;}
-					if(glwWnd.keys[109] == true){vpViewport.oWorld.lLens.Focus/=cng;}
+					if(glwWnd.keys[107] == true){
+						vpViewport.oWorld.lLens.Focus*=cng;}
+					if(glwWnd.keys[109] == true){
+						vpViewport.oWorld.lLens.Focus/=cng;}
 
 					SwapBuffers( glwWnd.hDC );		// Меняем буфер (двойная буферизация)
 				}
