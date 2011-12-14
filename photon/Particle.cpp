@@ -1,12 +1,13 @@
 #include "Particle.h"
 
+#define DEPTH 1.8
+
 Particle::~Particle(void)
 {
 
 }
-#define DEPTH 1.8
 
-int Particle::CheckCollision(Objects &opWorld_a)
+inline int Particle::CheckCollision(Objects &opWorld_a)
 {
 	if (TTL == 0)
 		return PARTICLE_TO_DELETE;
@@ -43,7 +44,7 @@ int Particle::Move(Objects &opWorld_a)
 			{
 				if ((persz < size)&&(persz > 0))
 				{
-					opWorld_a.isSensor[(int) ((persy*res))*opWorld_a.isSensor.Resolution + (int)(persz*res)] += 0.1;
+					opWorld_a.isSensor[(int) ((persy*res))*opWorld_a.isSensor.Resolution + (int)(persz*res)] += opWorld_a.ParticleEnergy;
 				}
 			}
 			x += vx; y += vy; z += vz; break;

@@ -14,6 +14,7 @@ public:
 	int MaxPhotons;
 
 	void OneStep(void);
+	void SceneInit(void);
 
 	Suns sSuns;
 	Particles pPhotons;

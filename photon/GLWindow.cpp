@@ -5,9 +5,14 @@ LRESULT  CALLBACK WndProc( HWND, UINT, WPARAM, LPARAM );
 GLWindow::GLWindow(int iResolution)
 {
 	active = true;
-	fullscreen = true;
-	fMulCoeffitient = 100.00/(float)iResolution;
+	fullscreen = false;
 	Resolution = iResolution;
+}
+
+GLWindow::GLWindow(void)
+{
+	active = true;
+	fullscreen = false;
 }
 
 GLWindow::~GLWindow(void)			// Корректное разрушение окна
@@ -271,6 +276,7 @@ int GLWindow::DrawGLScene(std::vector<float> &Matrix)
 
 	glTranslatef(-50.0f, -50.0f,-125);	// Сдвинемся влево на 1.5 единицы и
 
+	float fMulCoeffitient = 100.00/(float)Resolution;
 	glBegin(GL_QUADS);
 	float fBrightness;
 
@@ -293,8 +299,7 @@ int GLWindow::DrawGLScene(std::vector<float> &Matrix)
 	}
 	glEnd();
 
-	for(int i = 0; i < Resolution*Resolution; i++)
-		Matrix[i] = 0;
+	for(int i = 0; i < Resolution*Resolution; i++)	Matrix[i] = 0;
 
 	return true;	// Прорисовка прошла успешно
 }

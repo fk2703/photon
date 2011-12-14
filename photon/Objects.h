@@ -9,5 +9,7 @@ public:
 	~Objects(void);
 
 	ImageSensor isSensor;
+	float ParticleEnergy;
+	int TTL;
 };
 

@@ -7,6 +7,7 @@
 class GLWindow
 {
 public:
+	GLWindow(void);
 	GLWindow(int iResolution);
 	~GLWindow(void);
 
@@ -26,6 +27,4 @@ public:
 	bool  fullscreen;				// Флаг режима окна, установленный в полноэкранный по умолчанию
 
 	int Resolution;
-private:
-	float fMulCoeffitient;
 };

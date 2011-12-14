@@ -10,7 +10,7 @@
 
 using namespace std;
 
-GLWindow glwWnd(RESOLUTION);
+GLWindow glwWnd;
 
 
 LRESULT CALLBACK WndProc(  HWND  hWnd,      // Дескриптор нужного окна
@@ -78,10 +78,9 @@ int WINAPI WinMain(  HINSTANCE  hInstance,  // Дескриптор приложения
 	HINSTANCE  hPrevInstance,				// Дескриптор родительского приложения
 	LPSTR    lpCmdLine,						// Параметры командной строки
 	int    nCmdShow )						// Состояние отображения окна
-{
+	{
 	MSG  msg;								// Структура для хранения сообщения Windows
 	BOOL  done = false;						// Логическая переменная для выхода из цикла
-
 
 	glwWnd.fullscreen = false;				// Оконный режим
 
@@ -91,11 +90,11 @@ int WINAPI WinMain(  HINSTANCE  hInstance,  // Дескриптор приложения
 	{
 		return 0;							// Выйти, если окно не может быть создано
 	}
-	srand (time(NULL));
-	Viewport vpViewport(glwWnd.Resolution, 100);
+	Viewport vpViewport(50, 100);
+	glwWnd.Resolution = vpViewport.Resolution;
+	vpViewport.SceneInit();
 	ImageSensor &isSensor_a = vpViewport.oWorld.isSensor;
 	
-	vpViewport.sSuns.push_front(Sun(5, 5, 0, 1000));
 
 	while( !done )							// Цикл продолжается, пока done не равно true
 	{
