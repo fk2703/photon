@@ -23,14 +23,3 @@ void Viewport::OneStep(void)
 	sSuns.Shine(pPhotons_a);
 	pPhotons.Move();
 }
-
-void Viewport::SceneInit(void)
-{
-	
-	oWorld.ParticleEnergy = 0.1;
-	int ttl = 100;
-	int bright = 100000;
-	
-	sSuns.push_front(Sun(8, 5, 5, bright, ttl));
-}
-

@@ -124,6 +124,8 @@ int WINAPI WinMain(  HINSTANCE  hInstance,  // Дескриптор приложения
 				{
 					vpViewport.OneStep();
 					glwWnd.DrawGLScene(isSensor_a);			// Рисуем сцену
+					isSensor_a.Clear();
+
 					SwapBuffers( glwWnd.hDC );		// Меняем буфер (двойная буферизация)
 				}
 			}

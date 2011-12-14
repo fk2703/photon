@@ -12,7 +12,6 @@ Suns::~Suns(void)
 
 void Suns::Shine(Particles &pPhotons)
 {
-	unsigned long int rndMax = 0x7fff;
 	auto SunIter = this->begin();
 	double vx, vy, vz;
 	

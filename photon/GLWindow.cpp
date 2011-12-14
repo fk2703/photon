@@ -299,7 +299,6 @@ int GLWindow::DrawGLScene(std::vector<double> &Matrix)
 	}
 	glEnd();
 
-	for(int i = 0; i < Resolution*Resolution; i++)	Matrix[i] = 0;
-
+	
 	return true;	// Прорисовка прошла успешно
 }

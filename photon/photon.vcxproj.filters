@@ -18,18 +18,18 @@
     <Filter Include="Файлы исходного кода\Objects">
       <UniqueIdentifier>{9f7c6b5c-5529-4ab4-8199-28b89627fc7c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы исходного кода\Viewport">
+      <UniqueIdentifier>{ddac37aa-3001-410b-a71f-ad939de4c6e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Заголовочные файлы\Viewport">
+      <UniqueIdentifier>{d640797f-2761-496a-b5b0-6749c1f0327f}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Заголовочные файлы\Object">
       <UniqueIdentifier>{4f60c1b7-4a3d-4ec1-a7a6-d92b03808cf4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GLWindow.cpp">
-      <Filter>Файлы исходного кода</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
-      <Filter>Файлы исходного кода</Filter>
-    </ClCompile>
-    <ClCompile Include="Viewport.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
     <ClCompile Include="Sun.cpp">
@@ -56,14 +56,17 @@
     <ClCompile Include="ImageSensor.cpp">
       <Filter>Файлы исходного кода\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="ViewportSceneInit.cpp">
+      <Filter>Файлы исходного кода</Filter>
+    </ClCompile>
+    <ClCompile Include="GLWindow.cpp">
+      <Filter>Файлы исходного кода\Viewport</Filter>
+    </ClCompile>
+    <ClCompile Include="Viewport.cpp">
+      <Filter>Файлы исходного кода\Viewport</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GLWindow.h">
-      <Filter>Заголовочные файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="Viewport.h">
-      <Filter>Заголовочные файлы</Filter>
-    </ClInclude>
     <ClInclude Include="photon.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
@@ -90,6 +93,12 @@
     </ClInclude>
     <ClInclude Include="ImageSensor.h">
       <Filter>Заголовочные файлы\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Viewport.h">
+      <Filter>Заголовочные файлы\Viewport</Filter>
+    </ClInclude>
+    <ClInclude Include="GLWindow.h">
+      <Filter>Заголовочные файлы\Viewport</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
