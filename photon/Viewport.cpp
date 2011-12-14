@@ -23,3 +23,4 @@ void Viewport::OneStep(void)
 	sSuns.Shine(pPhotons_a);
 	pPhotons.Move();
 }
+

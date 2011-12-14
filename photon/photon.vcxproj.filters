@@ -65,6 +65,9 @@
     <ClCompile Include="Viewport.cpp">
       <Filter>Файлы исходного кода\Viewport</Filter>
     </ClCompile>
+    <ClCompile Include="Lens.cpp">
+      <Filter>Файлы исходного кода\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="photon.h">
@@ -99,6 +102,9 @@
     </ClInclude>
     <ClInclude Include="GLWindow.h">
       <Filter>Заголовочные файлы\Viewport</Filter>
+    </ClInclude>
+    <ClInclude Include="Lens.h">
+      <Filter>Заголовочные файлы\Object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

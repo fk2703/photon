@@ -82,6 +82,7 @@
   <ItemGroup>
     <ClInclude Include="GLWindow.h" />
     <ClInclude Include="ImageSensor.h" />
+    <ClInclude Include="Lens.h" />
     <ClInclude Include="MovingObject.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Objects.h" />
@@ -95,6 +96,7 @@
   <ItemGroup>
     <ClCompile Include="GLWindow.cpp" />
     <ClCompile Include="ImageSensor.cpp" />
+    <ClCompile Include="Lens.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MovingObject.cpp" />
     <ClCompile Include="Object.cpp" />

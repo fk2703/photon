@@ -11,6 +11,7 @@
 using namespace std;
 
 GLWindow glwWnd;
+Viewport vpViewport(101, 100);
 
 
 LRESULT CALLBACK WndProc(  HWND  hWnd,      // Дескриптор нужного окна
@@ -90,7 +91,6 @@ int WINAPI WinMain(  HINSTANCE  hInstance,  // Дескриптор приложения
 	{
 		return 0;							// Выйти, если окно не может быть создано
 	}
-	Viewport vpViewport(100, 100);
 	glwWnd.Resolution = vpViewport.Resolution;
 	vpViewport.SceneInit();
 	ImageSensor &isSensor_a = vpViewport.oWorld.isSensor;
@@ -125,6 +125,11 @@ int WINAPI WinMain(  HINSTANCE  hInstance,  // Дескриптор приложения
 					vpViewport.OneStep();
 					glwWnd.DrawGLScene(isSensor_a);			// Рисуем сцену
 					isSensor_a.Clear();
+
+					double cng = 1.1;
+
+					if(glwWnd.keys[107] == true){vpViewport.oWorld.lLens.Focus*=cng;}
+					if(glwWnd.keys[109] == true){vpViewport.oWorld.lLens.Focus/=cng;}
 
 					SwapBuffers( glwWnd.hDC );		// Меняем буфер (двойная буферизация)
 				}

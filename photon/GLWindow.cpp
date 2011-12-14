@@ -298,7 +298,6 @@ int GLWindow::DrawGLScene(std::vector<double> &Matrix)
 		fXcoord += fMulCoeffitient;
 	}
 	glEnd();
-
 	
 	return true;	// Прорисовка прошла успешно
 }
