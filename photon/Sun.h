@@ -6,7 +6,7 @@ class Sun :
 	public Object
 {
 public:
-	Sun (float xc, float yc, float zc, int Br, int TTLtemp) {x = xc; y = yc; z = zc; Brightness = Br; TTL = TTLtemp;};
+	Sun (double xc, double yc, double zc, int Br, int TTLtemp) {x = xc; y = yc; z = zc; Brightness = Br; TTL = TTLtemp;};
 	~Sun (void);
 
 	int Brightness;

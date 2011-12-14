@@ -15,7 +15,7 @@ class Particle :
 	public MovingObject
 {
 public:
-	Particle(float xc, float yc, float zc, float vxc, float vyc, float vzc)
+	Particle(double xc, double yc, double zc, double vxc, double vyc, double vzc)
 	{ x = xc; y = yc; z = zc; vx = vxc; vy = vyc; vz = vzc; };
 	~Particle (void);
 

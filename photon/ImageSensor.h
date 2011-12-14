@@ -3,12 +3,12 @@
 #include <vector>
 
 class ImageSensor : 
-	public std::vector<float>
+	public std::vector<double>
 {
 public:
 	~ImageSensor(void);
 
 	int Resolution;
-	float Size;
+	double Size;
 };
 

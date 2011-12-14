@@ -28,9 +28,9 @@ void Viewport::SceneInit(void)
 {
 	
 	oWorld.ParticleEnergy = 0.1;
-	int ttl = 10;
+	int ttl = 100;
 	int bright = 100000;
 	
-	sSuns.push_front(Sun(7, 5, 5, bright, ttl));
+	sSuns.push_front(Sun(8, 5, 5, bright, ttl));
 }
 

@@ -4,9 +4,9 @@ class Object
 {
 public:
 	Object() {};
-	Object(float xc, float yc, float zc) {x = xc; y = yc; z = zc;};
+	Object(double xc, double yc, double zc) {x = xc; y = yc; z = zc;};
 	~Object(void);
 
-	float x, y, z;
+	double x, y, z;
 };
 

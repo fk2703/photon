@@ -6,10 +6,10 @@ class MovingObject :
 {
 public:
 	MovingObject() {};
-	MovingObject(float xc, float yc, float zc) {x = xc; y = yc; z = zc;};
-	MovingObject(float xc, float yc, float zc, float vxc, float vyc, float vzc) {x = xc; y = yc; z = zc; vx = vxc; vy = vyc; vz = vzc;};
+	MovingObject(double xc, double yc, double zc) {x = xc; y = yc; z = zc;};
+	MovingObject(double xc, double yc, double zc, double vxc, double vyc, double vzc) {x = xc; y = yc; z = zc; vx = vxc; vy = vyc; vz = vzc;};
 	~MovingObject(void);
 
-	float vx, vy, vz;
+	double vx, vy, vz;
 };
 

@@ -90,7 +90,7 @@ int WINAPI WinMain(  HINSTANCE  hInstance,  // Дескриптор приложения
 	{
 		return 0;							// Выйти, если окно не может быть создано
 	}
-	Viewport vpViewport(50, 100);
+	Viewport vpViewport(100, 100);
 	glwWnd.Resolution = vpViewport.Resolution;
 	vpViewport.SceneInit();
 	ImageSensor &isSensor_a = vpViewport.oWorld.isSensor;

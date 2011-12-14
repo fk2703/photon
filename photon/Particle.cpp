@@ -12,7 +12,7 @@ inline int Particle::CheckCollision(Objects &opWorld_a)
 	if (TTL == 0)
 		return PARTICLE_TO_DELETE;
 
-	float size = opWorld_a.isSensor.Size;
+	double size = opWorld_a.isSensor.Size;
 	if ((y < size + PARTICLE_SPEED)&&(x < size + PARTICLE_SPEED)&&(y > -PARTICLE_SPEED)&&(x > -PARTICLE_SPEED))
 	{
 		if ((abs(x) < DEPTH)||(abs(x + vx) < DEPTH))
@@ -34,12 +34,12 @@ int Particle::Move(Objects &opWorld_a)
 	case PARTICLE_NO_COLLISION: x += vx; y += vy; z += vz; break;
 	case PARTICLE_SENSOR_COLLISION:
 		{
-			float persy, persz;
+			double persy, persz;
 			persy = y + vx/(vy*x);
 			persz = z + vx/(vz*x);
 
-			float size = opWorld_a.isSensor.Size;
-			float res = (float)opWorld_a.isSensor.Resolution/size;
+			double size = opWorld_a.isSensor.Size;
+			double res = (double)opWorld_a.isSensor.Resolution/size;
 			if ((persy < size)&&(persy > 0))
 			{
 				if ((persz < size)&&(persz > 0))
