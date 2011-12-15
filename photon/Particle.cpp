@@ -4,8 +4,10 @@
 
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_ieee_utils.h>
+#include "gsl/gsl_randist.h"
 
 #define DEPTH 0.5
+extern gsl_rng *randNumGen;
 
 Particle::~Particle(void)
 {
@@ -16,11 +18,11 @@ inline int Particle::CheckCollision(Objects &opWorld_a)
 {
 	if (TTL == 0)
 		return PARTICLE_TO_DELETE;
-
+	
 	double MaxDistance = 100;
 	if ((abs(x) > MaxDistance)||(abs(y) > MaxDistance)||(abs(z) > MaxDistance))
 		return PARTICLE_TO_DELETE;
-
+	
 	double size = opWorld_a.isSensor.Size;
 	if ((y < size)&&(z < size)&&(y > 0)&&(z > 0))
 	{
@@ -31,17 +33,24 @@ inline int Particle::CheckCollision(Objects &opWorld_a)
 		}
 	}
 
-	
 	size = opWorld_a.lLens.Size;
 	if ((x >= opWorld_a.lLens.x)&&((x + vx) < opWorld_a.lLens.x))
 	{
 		if (gsl_hypot((y - opWorld_a.lLens.y), (z - opWorld_a.lLens.z)) <= size)
-		//if ((y < size)&&(z < size)&&(y > 0)&&(z > 0))
 		{
 			return PARTICLE_LENS_COLLISION;
 		}
 	}
 
+	size = opWorld_a.wWall.Size;
+	if ((y <= opWorld_a.wWall.y)&&((y + vy) > opWorld_a.wWall.y))
+	{
+		if (gsl_hypot((x - opWorld_a.wWall.x), (z - opWorld_a.wWall.z)) <= size)
+		//if ((x  - opWorld_a.wWall.x < size)&&(z - opWorld_a.wWall.z < size)&&(x - opWorld_a.wWall.x > 0)&&(z - opWorld_a.wWall.z > 0))
+		{
+			return PARTICLE_WALL_COLLISION;
+		}
+	}
 
 	return PARTICLE_NO_COLLISION;
 }
@@ -116,6 +125,30 @@ int Particle::Move(Objects &opWorld_a)
 
 			break;
 		} break;
+	case PARTICLE_WALL_COLLISION: 
+		{
+			//фотон двигается до стены
+			long double time = (long double)abs(opWorld_a.wWall.y - y)/(long double)vy;
+			x += (long double)time*(long double)vx;
+			z += (long double)time*(long double)vz;
+
+			//глянец
+			//vy = -vy;
+
+			//матовая
+			gsl_ran_dir_3d(randNumGen, &vx, &vy, &vz);
+			vy = -abs(vy);
+			vx *= PARTICLE_SPEED;
+			vy *= PARTICLE_SPEED;
+			vz *= PARTICLE_SPEED;
+			
+
+			//фотон двигается с новым вектором после стены
+			y = (long double)opWorld_a.wWall.y + (1-time)*(long double)vy;
+			x += (1-time)*(long double)vx;
+			z += (1-time)*(long double)vz;
+
+		}break;
 	case PARTICLE_TO_DELETE: break;
 	}
 	return iCollision;

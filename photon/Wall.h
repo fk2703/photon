@@ -2,14 +2,13 @@
 
 #include "Object.h"
 
-class Lens :
+class Wall :
 	public Object
 {
 public:
-	Lens(void) {Size = 5; Focus = 5;};
-	~Lens(void);
+	Wall(void) {Size = 5;};
+	~Wall(void);
 
 	double Size;
-	double Focus;
 };
 

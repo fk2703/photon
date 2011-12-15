@@ -1,8 +1,11 @@
 #include <vector>
 #include <deque>
+#include <list>
 #include <time.h>
 
 #include "photon.h"
+#include "gsl/gsl_randist.h"
+gsl_rng *randNumGen;
 
 #pragma comment( lib, "opengl32.lib" ) // Искать OpenGL32.lib при линковке
 #pragma comment( lib, "glu32.lib" )    // Искать GLu32.lib при линковке
@@ -10,7 +13,7 @@
 using namespace std;
 
 GLWindow glwWnd;
-Viewport vpViewport(300, 100);
+Viewport vpViewport(200, 100);
 
 
 LRESULT CALLBACK WndProc(  HWND  hWnd,      // Дескриптор нужного окна
@@ -90,6 +93,7 @@ int WINAPI WinMain(  HINSTANCE  hInstance,  // Дескриптор приложения
 		return 0;							// Выйти, если окно не может быть создано
 	}
 	srand(time(NULL));
+	randNumGen = gsl_rng_alloc(gsl_rng_mt19937);
 
 	glwWnd.Resolution = vpViewport.Resolution;
 	vpViewport.SceneInit();

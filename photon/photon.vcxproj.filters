@@ -68,6 +68,9 @@
     <ClCompile Include="Lens.cpp">
       <Filter>Файлы исходного кода\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Wall.cpp">
+      <Filter>Файлы исходного кода\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="photon.h">
@@ -104,6 +107,9 @@
       <Filter>Заголовочные файлы\Viewport</Filter>
     </ClInclude>
     <ClInclude Include="Lens.h">
+      <Filter>Заголовочные файлы\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Wall.h">
       <Filter>Заголовочные файлы\Object</Filter>
     </ClInclude>
   </ItemGroup>

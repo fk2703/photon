@@ -1,9 +1,12 @@
 #include "Suns.h"
 #include <gsl/gsl_math.h>
+#include "gsl/gsl_randist.h"
+
+extern gsl_rng *randNumGen;
 
 Suns::Suns(void)
 {
-	randNumGen = gsl_rng_alloc(gsl_rng_mt19937);
+
 }
 
 
@@ -16,7 +19,7 @@ void Suns::Shine(Particles &pPhotons)
 	auto SunIter = this->begin();
 	double vx, vy, vz;
 	
-	while(SunIter < this->end())
+	while(SunIter != this->end())
 	{
 		for (int i = 0; i < SunIter->Brightness; i++)
 		{

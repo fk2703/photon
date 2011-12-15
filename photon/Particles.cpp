@@ -18,7 +18,7 @@ void Particles::Move(void)
 	Number = 0;
 	Objects &opWorld_a = (*opWorld);
 
-	while(ParticleIter < this->end())
+	while(ParticleIter != this->end())
 	{
 		if (ParticleIter->Move(opWorld_a) == PARTICLE_TO_DELETE) 
 			ParticleIter = erase(ParticleIter);

@@ -92,6 +92,7 @@
     <ClInclude Include="Sun.h" />
     <ClInclude Include="Suns.h" />
     <ClInclude Include="Viewport.h" />
+    <ClInclude Include="Wall.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GLWindow.cpp" />
@@ -107,6 +108,7 @@
     <ClCompile Include="Suns.cpp" />
     <ClCompile Include="Viewport.cpp" />
     <ClCompile Include="ViewportSceneInit.cpp" />
+    <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -2,6 +2,7 @@
 
 #include "ImageSensor.h"
 #include "Lens.h"
+#include "Wall.h"
 
 class Objects
 {
@@ -11,6 +12,7 @@ public:
 
 	ImageSensor isSensor;
 	Lens lLens;
+	Wall wWall;
 
 	double ParticleEnergy;
 	int TTL;
