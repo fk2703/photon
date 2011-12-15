@@ -10,7 +10,7 @@
 using namespace std;
 
 GLWindow glwWnd;
-Viewport vpViewport(200, 100);
+Viewport vpViewport(300, 100);
 
 
 LRESULT CALLBACK WndProc(  HWND  hWnd,      // Дескриптор нужного окна
@@ -85,10 +85,12 @@ int WINAPI WinMain(  HINSTANCE  hInstance,  // Дескриптор приложения
 	glwWnd.fullscreen = false;				// Оконный режим
 
 	// Создать наше OpenGL окно
-	if( !glwWnd.CreateGLWindow("Photon", 400, 300, 32) )
+	if( !glwWnd.CreateGLWindow("Photon", 400, 400, 32) )
 	{
 		return 0;							// Выйти, если окно не может быть создано
 	}
+	srand(time(NULL));
+
 	glwWnd.Resolution = vpViewport.Resolution;
 	vpViewport.SceneInit();
 	ImageSensor &isSensor_a = vpViewport.oWorld.isSensor;
@@ -125,11 +127,14 @@ int WINAPI WinMain(  HINSTANCE  hInstance,  // Дескриптор приложения
 					isSensor_a.Clear();
 
 					double cng = 1.01;
+					double nng = 0.1;
 
 					if(glwWnd.keys[107] == true){
-						vpViewport.oWorld.lLens.Focus*=cng;}
+						vpViewport.oWorld.lLens.x+=nng;}
+						//vpViewport.oWorld.lLens.Focus*=cng;}
 					if(glwWnd.keys[109] == true){
-						vpViewport.oWorld.lLens.Focus/=cng;}
+						vpViewport.oWorld.lLens.x-=nng;}
+						//vpViewport.oWorld.lLens.Focus/=cng;}
 
 					SwapBuffers( glwWnd.hDC );		// Меняем буфер (двойная буферизация)
 				}

@@ -1,5 +1,6 @@
 #include "Particle.h"
 #include <math.h>
+#include <time.h>
 
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_ieee_utils.h>
@@ -83,24 +84,36 @@ int Particle::Move(Objects &opWorld_a)
 		} break;
 	case PARTICLE_LENS_COLLISION:
 		{
-			x += vx; y += vy; z += vz; 
+			//фотон двигается до линзы
+			long double time = (long double)abs(opWorld_a.lLens.x - x)/(long double)vx;
+			y += (long double)time*(long double)vy;
+			z += (long double)time*(long double)vz;
 			
-			long double Focus = 1/opWorld_a.lLens.Focus;
-			long double LenCenter = opWorld_a.lLens.y*Focus;
+			long double Focus = 1/(long double)opWorld_a.lLens.Focus;
+			long double LenCenter = (long double)opWorld_a.lLens.y*Focus;
 			long double tempy, tempz;
 
-			tempy = vy/vx + LenCenter;
-			tempz = vz/vx + LenCenter;
+			tempy = (long double)vy/(long double)vx + LenCenter;
+			tempz = (long double)vz/(long double)vx + LenCenter;
 			
-			double vvx, vvy, vvz;
-
 			vx = (vx>=0?1:-1);
-			vy = tempy - y*Focus;
-			vz = tempz - z*Focus;
+			vy = tempy - (long double)y*Focus;
+			vz = tempz - (long double)z*Focus;
 			/**/
 
 			NormalizeSpeed();
 			
+			//фотон двигается с новым вектором после линзы
+			x = (long double)opWorld_a.lLens.x + (1-time)*(long double)vx;
+			y += (1-time)*(long double)vy;
+			z += (1-time)*(long double)vz;
+			
+			//salt
+			double SaltScale = 0.9*PARTICLE_SPEED;
+			y += (long double)((long double)rand()/(long double)RAND_MAX - 0.5)*SaltScale;
+			z += (long double)((long double)rand()/(long double)RAND_MAX - 0.5)*SaltScale;
+			/**/
+
 			break;
 		} break;
 	case PARTICLE_TO_DELETE: break;

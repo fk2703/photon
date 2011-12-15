@@ -3,7 +3,7 @@
 #include "MovingObject.h"
 #include "Objects.h"
 
-#define PARTICLE_SPEED				0.5
+#define PARTICLE_SPEED				0.2
 #define PARTICLE_IMMORTAL			-1
 
 #define PARTICLE_NO_COLLISION		2

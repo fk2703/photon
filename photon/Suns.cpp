@@ -1,4 +1,5 @@
 #include "Suns.h"
+#include <gsl/gsl_math.h>
 
 Suns::Suns(void)
 {
@@ -19,21 +20,56 @@ void Suns::Shine(Particles &pPhotons)
 	{
 		for (int i = 0; i < SunIter->Brightness; i++)
 		{
-			
-			gsl_ran_dir_3d(randNumGen, &vx, &vy, &vz);
 			/*
+			//точка
+			gsl_ran_dir_3d(randNumGen, &vx, &vy, &vz);
+			
 			vx *= PARTICLE_SPEED;
 			vy *= PARTICLE_SPEED;
 			vz *= PARTICLE_SPEED;
 			
 			pPhotons.push_back(
 				Particle(SunIter->x, SunIter->y, SunIter->z, vx, vy, vz)
-			);
+				);
 			/**/
-			
-			//gsl_ran_dir_2d(randNumGen, &vy, &vz);
 
-			double rad = 6.0;
+			//конус
+			double maxvx = 0.9;
+			do 
+			{
+				gsl_ran_dir_3d(randNumGen, &vx, &vy, &vz);
+			} while(abs(vx) < maxvx);
+
+			vx = -abs(vx);
+			vx *= PARTICLE_SPEED;
+			vy *= PARTICLE_SPEED;
+			vz *= PARTICLE_SPEED;
+
+			pPhotons.push_back(
+				Particle(SunIter->x, SunIter->y, SunIter->z, vx, vy, vz)
+				);
+			/**/
+
+			/*
+			//кольцо
+			gsl_ran_dir_2d(randNumGen, &vy, &vz); 
+
+			double rad = 5.0;
+			pPhotons.push_back(
+				Particle( SunIter->x, rad*vy + SunIter->y, rad*vz + SunIter->z, -PARTICLE_SPEED, 0, 0)
+				);
+			/**/
+
+			/*
+			//проектор
+			double rad = 5.0;
+			double maxi = 0x7fffffff;//дискретизация
+			do 
+			{
+				vy = (double)gsl_rng_uniform_int(randNumGen, maxi)/maxi - 0.5;
+				vz = (double)gsl_rng_uniform_int(randNumGen, maxi)/maxi - 0.5;
+			} while (gsl_hypot(vy, vz) >= 0.5);
+
 			pPhotons.push_back(
 				Particle( SunIter->x, rad*vy + SunIter->y, rad*vz + SunIter->z, -PARTICLE_SPEED, 0, 0)
 				);
