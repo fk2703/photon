@@ -109,7 +109,7 @@ int Particle::Move(Objects &opWorld_a)
 			z += (1-time)*(long double)vz;
 			
 			//salt
-			double SaltScale = 0.9*PARTICLE_SPEED;
+			double SaltScale = 0.2*PARTICLE_SPEED;
 			y += (long double)((long double)rand()/(long double)RAND_MAX - 0.5)*SaltScale;
 			z += (long double)((long double)rand()/(long double)RAND_MAX - 0.5)*SaltScale;
 			/**/

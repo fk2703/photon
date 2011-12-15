@@ -16,5 +16,5 @@ void Viewport::SceneInit(void)
 	oWorld.lLens.y = 5;
 	oWorld.lLens.z = 5;
 
-	sSuns.push_front(Sun(15, 5, 5, bright, ttl));
+	sSuns.push_front(Sun(15, 9, 10, bright, ttl));
 }

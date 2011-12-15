@@ -20,7 +20,7 @@ void Suns::Shine(Particles &pPhotons)
 	{
 		for (int i = 0; i < SunIter->Brightness; i++)
 		{
-			/*
+			
 			//точка
 			gsl_ran_dir_3d(randNumGen, &vx, &vy, &vz);
 			
@@ -32,7 +32,7 @@ void Suns::Shine(Particles &pPhotons)
 				Particle(SunIter->x, SunIter->y, SunIter->z, vx, vy, vz)
 				);
 			/**/
-
+			/*
 			//конус
 			double maxvx = 0.9;
 			do 
