@@ -13,7 +13,7 @@ gsl_rng *randNumGen;
 using namespace std;
 
 GLWindow glwWnd;
-Viewport vpViewport(200, 100);
+Viewport vpViewport(300, 100);
 
 
 LRESULT CALLBACK WndProc(  HWND  hWnd,      // Дескриптор нужного окна
@@ -139,6 +139,9 @@ int WINAPI WinMain(  HINSTANCE  hInstance,  // Дескриптор приложения
 					if(glwWnd.keys[109] == true){
 						vpViewport.oWorld.lLens.x-=nng;}
 						//vpViewport.oWorld.lLens.Focus/=cng;}
+					if(glwWnd.keys[32] == true){
+						vpViewport.oWorld.isSensor.ClearMode = SENSOR_ONE_CLEAR;}
+
 
 					SwapBuffers( glwWnd.hDC );		// Меняем буфер (двойная буферизация)
 				}

@@ -8,7 +8,7 @@
 
 
 class Suns :
-	public std::list<Sun>
+	public std::deque<Sun>
 {
 public:
 	Suns(void);

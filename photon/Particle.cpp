@@ -43,7 +43,7 @@ inline int Particle::CheckCollision(Objects &opWorld_a)
 	}
 
 	size = opWorld_a.wWall.Size;
-	if ((y <= opWorld_a.wWall.y)&&((y + vy) > opWorld_a.wWall.y))
+	if ((y <= opWorld_a.wWall.y)&&((y + vy) > opWorld_a.wWall.y)||(y >= opWorld_a.wWall.y)&&((y + vy) < opWorld_a.wWall.y))
 	{
 		if (gsl_hypot((x - opWorld_a.wWall.x), (z - opWorld_a.wWall.z)) <= size)
 		//if ((x  - opWorld_a.wWall.x < size)&&(z - opWorld_a.wWall.z < size)&&(x - opWorld_a.wWall.x > 0)&&(z - opWorld_a.wWall.z > 0))
@@ -134,14 +134,15 @@ int Particle::Move(Objects &opWorld_a)
 
 			//глянец
 			//vy = -vy;
-
+			
 			//матовая
+			double temp = (vy>=0?-1:1);
 			gsl_ran_dir_3d(randNumGen, &vx, &vy, &vz);
-			vy = -abs(vy);
+			vy = temp*abs(vy);
 			vx *= PARTICLE_SPEED;
 			vy *= PARTICLE_SPEED;
 			vz *= PARTICLE_SPEED;
-			
+			/**/
 
 			//фотон двигается с новым вектором после стены
 			y = (long double)opWorld_a.wWall.y + (1-time)*(long double)vy;
