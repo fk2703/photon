@@ -3,7 +3,7 @@
 void Viewport::SceneInit(void)
 {
 	oWorld.ParticleEnergy = 0.01;
-	int ttl = 150;
+	int ttl = 250;
 	int bright = 10000;
 
 	oWorld.isSensor.ClearMode = SENSOR_NO_CLEAR;
@@ -11,8 +11,8 @@ void Viewport::SceneInit(void)
 	oWorld.isSensor.Size = 10;
 
 	oWorld.lLens.Focus = 5.0;
-	oWorld.lLens.Size = 15;
-	oWorld.lLens.x = 2.9;
+	oWorld.lLens.Size = 5;
+	oWorld.lLens.x = 2.942;
 	oWorld.lLens.y = 5;
 	oWorld.lLens.z = 5;
 

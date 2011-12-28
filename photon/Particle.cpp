@@ -99,11 +99,12 @@ int Particle::Move(Objects &opWorld_a)
 			z += (long double)time*(long double)vz;
 			
 			long double Focus = 1/(long double)opWorld_a.lLens.Focus;
-			long double LenCenter = (long double)opWorld_a.lLens.y*Focus;
+			long double LenCenterY = (long double)opWorld_a.lLens.y*Focus;
+			long double LenCenterZ = (long double)opWorld_a.lLens.z*Focus;
 			long double tempy, tempz;
 
-			tempy = (long double)vy/(long double)vx + LenCenter;
-			tempz = (long double)vz/(long double)vx + LenCenter;
+			tempy = (long double)vy/(long double)vx + LenCenterY;
+			tempz = (long double)vz/(long double)vx + LenCenterZ;
 			
 			vx = (vx>=0?1:-1);
 			vy = tempy - (long double)y*Focus;
@@ -116,6 +117,7 @@ int Particle::Move(Objects &opWorld_a)
 			x = (long double)opWorld_a.lLens.x + (1-time)*(long double)vx;
 			y += (1-time)*(long double)vy;
 			z += (1-time)*(long double)vz;
+			
 			
 			//salt
 			double SaltScale = 0.2*PARTICLE_SPEED;
